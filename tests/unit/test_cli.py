@@ -79,3 +79,39 @@ def test_cli_heal_with_mocked_orchestrator(sample_test_path: Path) -> None:
         assert result.exit_code == 0
         assert "#buy-now" in result.output
         assert "Healing Report" in result.output
+
+
+def test_cli_cache_list_does_not_import_litellm() -> None:
+    """Ensure lightweight local cache commands do not eagerly import heavy LLM packages."""
+    import subprocess
+    import sys
+
+    code = (
+        "import sys\n"
+        "from typer.testing import CliRunner\n"
+        "from kernhell.cli.app import app\n"
+        "runner = CliRunner()\n"
+        "res = runner.invoke(app, ['cache', 'list'])\n"
+        "assert 'litellm' not in sys.modules, 'litellm was eagerly imported by cache list'\n"
+    )
+    proc = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True)
+    assert proc.returncode == 0, f"Subprocess validation failed:\n{proc.stderr}\n{proc.stdout}"
+
+
+def test_cli_dashboard_dual_orchestration() -> None:
+    """Ensure dashboard command orchestrates both FastAPI and Next.js UI subprocesses."""
+    with patch("uvicorn.run") as mock_uvicorn_run, \
+         patch("subprocess.Popen") as mock_popen, \
+         patch("kernhell.cli.commands.dashboard._terminate_process_tree") as mock_cleanup:
+
+        mock_proc = MagicMock()
+        mock_popen.return_value = mock_proc
+
+        result = runner.invoke(app, ["dashboard", "--no-open"])
+        assert result.exit_code == 0
+        assert "Mission Control Active" in result.output
+        assert "Web Dashboard UI" in result.output
+        mock_uvicorn_run.assert_called_once()
+        mock_cleanup.assert_called_once()
+
+
