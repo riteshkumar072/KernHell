@@ -18,7 +18,7 @@ import structlog
 from kernhell.cache.embedder import SemanticEmbedder, cosine_similarity
 from kernhell.cache.schemas import CacheEntry, CacheStats
 from kernhell.core.config import KernHellConfig
-from kernhell.core.models import SelectorFix, SelectorStrategy
+from kernhell.core.models import SelectorFix
 
 logger = structlog.get_logger()
 

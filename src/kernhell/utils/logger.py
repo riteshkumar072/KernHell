@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import logging
 import sys
-
 from pathlib import Path
 from typing import Any, Optional
 
@@ -44,7 +43,7 @@ class MinimalCLIProcessor:
             line = f"  [dim]›[/dim] Running Playwright suite on [white]{test_file}[/white]..."
 
         elif event == "scanner.pytest.passed":
-            line = f"  [dim]›[/dim] [bold green]PASS[/bold green] Playwright run completed (all tests passed)"
+            line = "  [dim]›[/dim] [bold green]PASS[/bold green] Playwright run completed (all tests passed)"
 
         elif event == "parser.failure_found":
             line_num = event_dict.get("line", "?")
@@ -67,10 +66,10 @@ class MinimalCLIProcessor:
             line = f"  [dim]›[/dim] [bold green]CACHE[/bold green] Semantic cache hit ([bold yellow]{score_pct}%[/bold yellow]): [bold green]{healed}[/bold green]"
 
         elif event == "cache.miss":
-            line = f"  [dim]›[/dim] Semantic cache miss — escalating to AI healer..."
+            line = "  [dim]›[/dim] Semantic cache miss — escalating to AI healer..."
 
         elif event == "healer.query":
-            line = f"  [dim]›[/dim] Querying AI engine for repair candidate..."
+            line = "  [dim]›[/dim] Querying AI engine for repair candidate..."
 
         elif event == "healer.generated":
             sel = escape(str(event_dict.get("selector", "")))
@@ -81,28 +80,28 @@ class MinimalCLIProcessor:
             line = f"  [dim]›[/dim] Applying surgical AST patch to [white]{file_name}[/white]..."
 
         elif event == "patcher.complete":
-            line = f"  [dim]›[/dim] AST patch applied successfully"
+            line = "  [dim]›[/dim] AST patch applied successfully"
 
         elif event == "verifier.start":
-            line = f"  [dim]›[/dim] Re-running Playwright to verify fix..."
+            line = "  [dim]›[/dim] Re-running Playwright to verify fix..."
 
         elif event == "verifier.passed":
-            line = f"  [dim]›[/dim] [bold green]PASS[/bold green] Verification passed! Repaired selector confirmed working"
+            line = "  [dim]›[/dim] [bold green]PASS[/bold green] Verification passed! Repaired selector confirmed working"
 
         elif event == "verifier.failed":
-            line = f"  [dim]›[/dim] [bold red]FAIL[/bold red] Verification failed on candidate selector"
+            line = "  [dim]›[/dim] [bold red]FAIL[/bold red] Verification failed on candidate selector"
 
         elif event == "orchestrator.cache_fix_verification_failed.proceeding_to_ai":
-            line = f"  [dim]›[/dim] [dim yellow]Cache suggestion failed live verification — escalating to Healer...[/dim yellow]"
+            line = "  [dim]›[/dim] [dim yellow]Cache suggestion failed live verification — escalating to Healer...[/dim yellow]"
 
         elif event == "healer.llm_call_failed.falling_back_to_heuristic":
-            line = f"  [dim]›[/dim] [dim yellow]LLM call unavailable/timed out — falling back to heuristic healer...[/dim yellow]"
+            line = "  [dim]›[/dim] [dim yellow]LLM call unavailable/timed out — falling back to heuristic healer...[/dim yellow]"
 
         elif event == "analyzer.llm_call_failed.falling_back_to_heuristic":
             line = None
 
         elif "no_api_key" in str(event):
-            line = f"  [dim]›[/dim] [dim]No LLM API key configured — using smart heuristic DOM healer...[/dim]"
+            line = "  [dim]›[/dim] [dim]No LLM API key configured — using smart heuristic DOM healer...[/dim]"
 
         elif level in ("warning", "error", "critical"):
             msg = escape(str(event).replace(".", " ").replace("_", " ").title())

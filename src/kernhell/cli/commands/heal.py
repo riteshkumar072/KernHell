@@ -127,7 +127,7 @@ def heal_command(
         try:
             report = orchestrator.heal(test_file, dry_run=dry_run)
             reports.append(report)
-        except NoFailuresDetectedError as exc:
+        except NoFailuresDetectedError:
             if output_format != "json":
                 print_clean_pass_panel(test_file.name)
             continue

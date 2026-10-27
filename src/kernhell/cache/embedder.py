@@ -10,7 +10,7 @@ from __future__ import annotations
 import hashlib
 import math
 import re
-from typing import Sequence
+from collections.abc import Sequence
 
 import structlog
 
@@ -24,7 +24,7 @@ def cosine_similarity(v1: Sequence[float], v2: Sequence[float]) -> float:
     if len(v1) != len(v2) or not v1:
         return 0.0
 
-    dot = sum(a * b for a, b in zip(v1, v2))
+    dot = sum(a * b for a, b in zip(v1, v2, strict=False))
     norm_a = math.sqrt(sum(a * a for a in v1))
     norm_b = math.sqrt(sum(b * b for b in v2))
 

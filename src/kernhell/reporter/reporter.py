@@ -8,11 +8,9 @@ from typing import Optional
 
 from rich import box
 from rich.console import Console
-from rich.panel import Panel
-from rich.syntax import Syntax
 from rich.table import Table
 
-from kernhell.core.models import HealingReport, HealingResult
+from kernhell.core.models import HealingReport
 
 console = Console(stderr=True)
 

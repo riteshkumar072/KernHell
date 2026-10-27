@@ -77,7 +77,7 @@ def scan_command(
 
     try:
         results = orchestrator.scan(test_file)
-    except NoFailuresDetectedError as exc:
+    except NoFailuresDetectedError:
         print_clean_pass_panel(test_file.name)
         raise typer.Exit(code=0)
     except (PlaywrightNotInstalledError, ScannerError, TestFileNotFoundError) as exc:

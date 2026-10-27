@@ -44,13 +44,14 @@ def dashboard_command(
     console.print(Panel(panel_content, title="Mission Control Active", border_style="cyan"))
 
     if not no_open:
-        try:
+        import contextlib
+
+        with contextlib.suppress(Exception):
             webbrowser.open(f"{url}/docs")
-        except Exception:
-            pass
 
     try:
         import uvicorn
+
         from kernhell.api.server import create_app
     except ImportError:
         console.print(

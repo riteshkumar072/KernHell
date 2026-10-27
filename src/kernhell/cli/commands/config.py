@@ -10,7 +10,7 @@ from rich import box
 from rich.console import Console
 from rich.table import Table
 
-from kernhell.core.config import KernHellConfig, load_config
+from kernhell.core.config import load_config
 from kernhell.utils.logger import setup_logging
 
 console = Console(stderr=True)

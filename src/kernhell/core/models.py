@@ -7,12 +7,11 @@ This enforces clean boundaries and makes serialization/validation automatic.
 from __future__ import annotations
 
 import enum
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Optional
 
 from pydantic import BaseModel, Field
-
 
 # ---------------------------------------------------------------------------
 # Enums
@@ -85,7 +84,7 @@ class FailureContext(BaseModel):
     surrounding_code: str = ""
 
     # Metadata
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class PrunedDOM(BaseModel):

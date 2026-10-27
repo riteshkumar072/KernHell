@@ -11,7 +11,7 @@ from pathlib import Path
 import structlog
 
 from kernhell.core.config import KernHellConfig
-from kernhell.core.exceptions import NoFailuresDetectedError, VerificationFailedError
+from kernhell.core.exceptions import NoFailuresDetectedError
 from kernhell.core.models import SelectorFix
 from kernhell.scanner.runner import ScannerRunner
 from kernhell.utils.file_utils import restore_from_backup

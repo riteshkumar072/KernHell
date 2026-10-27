@@ -10,12 +10,12 @@ Provides reusable display components for the terminal:
 
 from __future__ import annotations
 
+from rich import box
 from rich.console import Console
 from rich.panel import Panel
+from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
-from rich.syntax import Syntax
-from rich import box
 
 from kernhell import __version__
 from kernhell.core.models import FailureContext, HealingReport, HealingResult, PrunedDOM
@@ -53,7 +53,7 @@ def print_banner() -> None:
 # ---------------------------------------------------------------------------
 
 
-def print_clean_pass_panel(filename: str, duration_ms: Optional[int] = None) -> None:
+def print_clean_pass_panel(filename: str, duration_ms: int | None = None) -> None:
     """Display a prominent, high-visibility panel when all tests pass cleanly."""
     timing = f" in [bold cyan]{duration_ms:,}ms[/bold cyan]" if duration_ms is not None else ""
     content = (

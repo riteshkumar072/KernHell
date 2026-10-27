@@ -96,6 +96,17 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+ignore = [
+    "E501",   # line too long (formatted by code formatter / rich console markup)
+    "B008",   # function call in argument defaults (standard Typer pattern)
+    "B904",   # raise ... from (fallback patterns)
+    "RUF001", # ambiguous unicode characters (rich UI glyphs like ›)
+    "RUF002", # ambiguous unicode in docstrings
+    "RUF003", # ambiguous unicode in comments
+    "UP045",  # non-pep604 Optional[T] annotation
+    "UP042",  # inherit from str and Enum
+    "N802",   # function name lowercase (LibCST visitor methods like leave_SimpleString)
+]
 
 [tool.mypy]
 python_version = "3.11"

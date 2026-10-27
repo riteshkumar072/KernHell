@@ -14,8 +14,8 @@ test navigates to a URL before interacting with elements.
 from __future__ import annotations
 
 import asyncio
-import subprocess
 import re
+import subprocess
 import sys
 from pathlib import Path
 

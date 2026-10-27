@@ -141,9 +141,9 @@ def set_llm(
     if final_key and env_var:
         lines: list[str] = []
         if global_env_file.is_file():
-            for l in global_env_file.read_text(encoding="utf-8").splitlines():
-                if l.strip() and not l.strip().startswith(f"{env_var}="):
-                    lines.append(l)
+            for env_line in global_env_file.read_text(encoding="utf-8").splitlines():
+                if env_line.strip() and not env_line.strip().startswith(f"{env_var}="):
+                    lines.append(env_line)
         lines.append(f"{env_var}={final_key}")
         global_env_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
         os.environ[env_var] = final_key

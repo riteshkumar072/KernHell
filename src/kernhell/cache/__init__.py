@@ -5,9 +5,9 @@ from kernhell.cache.embedder import SemanticEmbedder, cosine_similarity
 from kernhell.cache.schemas import CacheEntry, CacheStats
 
 __all__ = [
-    "CacheManager",
-    "SemanticEmbedder",
     "CacheEntry",
+    "CacheManager",
     "CacheStats",
+    "SemanticEmbedder",
     "cosine_similarity",
 ]

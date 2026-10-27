@@ -16,7 +16,7 @@ from typing import Optional
 
 import structlog
 
-from kernhell.core.exceptions import PatcherError, SelectorNotFoundInASTError
+from kernhell.core.exceptions import SelectorNotFoundInASTError
 from kernhell.core.models import SelectorFix
 from kernhell.utils.file_utils import backup_file, read_file, write_file
 
@@ -163,7 +163,10 @@ class SurgicalPatcher:
             )
 
         try:
-            import libcst as cst
+            import importlib.util
+
+            if importlib.util.find_spec("libcst") is None:
+                raise ImportError("libcst not installed")
 
             return self._cst_transform(
                 source_code=source_code,
@@ -299,9 +302,7 @@ class SurgicalPatcher:
                 if old_role and old_role.lower() == cur_role.lower():
                     if not old_name or not cur_name or old_name.lower() in cur_name.lower():
                         role_matches = True
-                elif cur_name and cur_name in old_sel:
-                    role_matches = True
-                elif "role=" in old_sel.lower() or "getbyrole" in old_sel.lower() or "get_by_role" in old_sel.lower():
+                elif (cur_name and cur_name in old_sel) or "role=" in old_sel.lower() or "getbyrole" in old_sel.lower() or "get_by_role" in old_sel.lower():
                     role_matches = True
 
                 if role_matches:

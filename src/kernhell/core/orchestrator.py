@@ -32,7 +32,6 @@ from kernhell.core.exceptions import (
     ScannerError,
 )
 from kernhell.core.models import (
-    Diagnosis,
     FailureContext,
     FailureType,
     HealingReport,

@@ -9,18 +9,12 @@ Loads settings from (in priority order):
 
 from __future__ import annotations
 
-import sys
+import tomllib
 from pathlib import Path
 from typing import Optional
 
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-if sys.version_info >= (3, 11):
-    import tomllib
-else:
-    import tomli as tomllib  # type: ignore[import-untyped]
-
 
 # ---------------------------------------------------------------------------
 # Config Sub-Sections

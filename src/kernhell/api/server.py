@@ -29,9 +29,7 @@ from kernhell.core.models import (
     FailureContext,
     FailureType,
     HealingReport,
-    PrunedDOM,
     SelectorFix,
-    SelectorStrategy,
     SelectorType,
 )
 from kernhell.core.orchestrator import HealingOrchestrator
